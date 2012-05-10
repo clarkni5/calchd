@@ -30,13 +30,15 @@ $(window).ready(function(){
 	// Use keyup to capture the escape key
 	$("body").keyup(function(e) {
 		if (e.which == 27) { // escape
-			press("C");
+			press("C"); // clear
 		}
 	});
 	
 	// Use keypress for everything else because it normalizes key codes
 	$("body").keypress(function(e) {
-		if (e.which == 61 || e.which == 13) { // equals or enter
+		if (e.which == 67 || e.which == 99) { // 'c' or 'C'
+			press("C"); // clear
+		} else if (e.which == 61 || e.which == 13) { // equals or enter
 			press("=");
 		} else if (e.which >= 48 && e.which <= 57) {
 			// Numeric
