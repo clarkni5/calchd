@@ -27,12 +27,30 @@ $(window).ready(function(){
 		e.preventDefault();
 	});
 	
-	$(document).keyup(function(e) {
-		if (e.keyCode == 13) { // enter
-			press("=");
-		}
-		if (e.keyCode == 27) { // esc
+	// Use keyup to capture the escape key
+	$("body").keyup(function(e) {
+		if (e.which == 27) { // escape
 			press("C");
+		}
+	});
+	
+	// Use keypress for everything else because it normalizes key codes
+	$("body").keypress(function(e) {
+		if (e.which == 61 || e.which == 13) { // equals or enter
+			press("=");
+		} else if (e.which >= 48 && e.which <= 57) {
+			// Numeric
+			press(String.fromCharCode(e.which));
+		} else if (e.which == 46) { // decimal
+			press(".");
+		} else if (e.which == 43) { // add
+			press("+");
+		} else if (e.which == 45) { // subtract
+			press("-");
+		} else if (e.which == 42) { // multiply
+			press("*");
+		} else if (e.which == 47) { // divide
+			press("/");
 		}
 	});
 });
