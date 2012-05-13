@@ -17,10 +17,26 @@ var newNumber = true;
 var display;
 
 $(window).ready(function(){
+	// Adjust keypad height to fit the window
+	var bezelHeight = $(".bezel").height();
+	var $keypad = $(".keypad");
+	var keypadPosition = $keypad.position();
+	var keypadHeight = bezelHeight - keypadPosition.top;
+	var keyHeight = keypadHeight / 5;
+	
+	$keypad.height(keypadHeight);
+	$(".keypad li").each(function() {
+		$(this).height(keyHeight);
+	});
+	$(".equals").height(2 * keyHeight);
+	
+	// @todo Readjust height when the viewport size changes
+	
+	
 	display = $(".display");
 	display.text(defaultValue);
 	
-	$("a").tap(function(e) {
+	$("a").click(function(e) {
 		var key = $(this).text();
 		press(key);
 		

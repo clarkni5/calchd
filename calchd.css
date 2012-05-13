@@ -1,3 +1,14 @@
+html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+html, button, input, select, textarea { font-family: sans-serif; color: #222; }
+body { margin: 0; font-size: 14px; line-height: 1.4; }
+
+a { color: #00e; }
+a:visited { color: #551a8b; }
+a:hover { color: #06e; }
+a:focus { outline: thin dotted; }
+a:hover, a:active { outline: 0; }
+
+
 /* apply a natural box layout model to all elements */
 * {
 	box-sizing: border-box;
@@ -18,7 +29,17 @@ li {
 	list-style: none;
 }
 
-.bezel { background: #9A9192; padding: 20px; }
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+.bezel {
+	background: #9A9192;
+	height: 100%;
+	padding: 20px;
+}
 
 .display_wrapper { background: #333; margin-bottom: 40px; padding: 20px 60px; -webkit-border-radius: 20px; }
 .make { color: #F4ECAB; font-size: 123.1%; font-weight: bold; }
@@ -45,7 +66,8 @@ li {
 	display: block;
 	font-size: 45px;
 	font-weight: bold;
-	text-align: center;
+	height: 100%;
+	padding-left: 18px;
 	text-decoration: none;
 
 	-webkit-border-radius: 18px;
@@ -54,8 +76,4 @@ li {
 .keypad li.clear a {
 	background: #E33260;
 	color: #FFF;
-}
-
-.keypad li.equals a {
-	height: 250px;
 }
