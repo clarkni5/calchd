@@ -24,6 +24,8 @@ $(window).ready(function(){
 	var keypadHeight = bezelHeight - keypadPosition.top;
 	var keyHeight = keypadHeight / 5;
 	
+//keyHeight = Math.max(50, keyHeight);
+	
 	$keypad.height(keypadHeight);
 	$(".keypad li").each(function() {
 		$(this).height(keyHeight);
@@ -35,13 +37,15 @@ $(window).ready(function(){
 	
 	display = $(".display");
 	display.text(defaultValue);
+
 	
-	$("a").click(function(e) {
+	$("a").on("click", function(e) {
 		var key = $(this).text();
 		press(key);
 		
 		e.preventDefault();
 	});
+
 	
 	// Use keyup to capture the escape key
 	$("body").keyup(function(e) {
@@ -108,6 +112,7 @@ function calc() {
 	
 	return result;
 }
+
 
 function press(key) {
 	var text = display.text();
@@ -184,4 +189,7 @@ function press(key) {
 			
 			display.text(text + key);
 	}
+	
+	$(".active").removeClass("active");
+	$("[data-key='" + key + "']").addClass("active");
 }

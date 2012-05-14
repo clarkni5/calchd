@@ -20,6 +20,21 @@ a:hover, a:active { outline: 0; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
 
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -29,25 +44,40 @@ li {
 	list-style: none;
 }
 
-html,
-body {
-	height: 100%;
-	margin: 0;
-}
-
 .bezel {
 	background: #9A9192;
 	height: 100%;
-	padding: 20px;
+	padding: 9px;
 }
 
-.display_wrapper { background: #333; margin-bottom: 40px; padding: 20px 60px; -webkit-border-radius: 20px; }
-.make { color: #F4ECAB; font-size: 123.1%; font-weight: bold; }
-.display { background: #AAD0D0; font-size: 140%; font-weight: bold; padding: 20px; text-align: right; margin: 20px 0;  -webkit-border-radius: 10px; }
+.display_wrapper {
+	background: #333;
+	margin-bottom: 18px;
+	padding: 5px 18px;
+	
+	-webkit-border-radius: 9px;
+}
+
+.make {
+	color: #F4ECAB;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.display {
+	background: #AAD0D0;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px 9px;
+	text-align: right;
+	margin: 5px 0;
+	
+	-webkit-border-radius: 9px;
+}
 
 .keypad li {
 	float: left;
-	padding: 10px;
+	padding: 5px;
 	width: 25%;
 }
 
@@ -62,18 +92,58 @@ body {
 .keypad a {
 	background: #CCC9C0;
 	border: solid 2px #555;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
+	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.7);
 	color: #333;
 	display: block;
-	font-size: 45px;
+	font-size: 18px;
 	font-weight: bold;
 	height: 100%;
-	padding-left: 18px;
+	padding-left: 9px;
 	text-decoration: none;
 
-	-webkit-border-radius: 18px;
+	-webkit-border-radius: 9px;
 }
 
 .keypad li.clear a {
 	background: #E33260;
 	color: #FFF;
+}
+
+a.active {
+	background: #A8A495;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
+	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
+}
+
+@media only screen and (min-width: 360px) {
+	.bezel {
+		padding: 18px;
+	}
+
+	.display_wrapper {
+		margin-bottom: 40px;
+		padding: 20px 60px;
+	}
+
+	.make {
+		font-size: 16px;
+	}
+
+	.display {
+		font-size: 20px;
+		padding: 20px;
+		margin: 20px 0;
+	}
+
+	.keypad li {
+		padding: 9px;
+	}
+
+	.keypad a {
+		font-size: 45px;
+		padding-left: 18px;
+	}
 }
