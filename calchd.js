@@ -38,7 +38,7 @@ $(window).ready(function(){
 	display.text(defaultValue);
 
 	
-	$("a").on("click", function(e) {
+	$("body").on("click", "a[data-key]", function(e) {
 		var key = $(this).data("key");
 		press(key);
 		
