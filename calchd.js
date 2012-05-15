@@ -18,22 +18,7 @@ var displayOperator;
 var displayValue;
 
 $(window).ready(function(){
-	// Adjust keypad height to fit the window
-	var bezelHeight = $(".bezel").height();
-	var $keypad = $(".keypad");
-	var keypadPosition = $keypad.position();
-	var keypadHeight = bezelHeight - keypadPosition.top;
-	var keyHeight = keypadHeight / 5;
-
-	
-	$keypad.height(keypadHeight);
-	$(".keypad li").each(function() {
-		$(this).height(keyHeight);
-	});
-	$(".equals").height(2 * keyHeight);
-	
-	// @todo Readjust height when the viewport size changes
-	
+	adjustLayout();
 	
 	displayOperator = $(".display .operator");
 	
@@ -94,6 +79,44 @@ $(window).ready(function(){
 		}
 	});
 });
+
+
+function adjustLayout() {
+	var keypadWidth = $(".keypad").width();
+	var keyWidth = $(".clear").outerWidth();
+	
+	// Make corrections to the keypad and key size to keep the them aligned
+	var adjustment = keypadWidth % 4;
+	if (adjustment) {
+		keypadWidth = keypadWidth - adjustment;
+		$(".keypad").width(keypadWidth);
+		
+		keyWidth = keypadWidth / 4;
+
+		// Adjust the width of all the keys
+		$(".keypad li").each(function() {
+			var $this = $(this);
+			var width = $this.hasClass("zero") ? 2 * keyWidth : keyWidth;
+			$this.width(width);
+		});
+	}
+	
+	
+	// Adjust keypad height to fit the window
+	var bezelHeight = $(".bezel").height();
+	var $keypad = $(".keypad");
+	var keypadPosition = $keypad.position();
+	var keypadHeight = bezelHeight - keypadPosition.top;
+	var keyHeight = keypadHeight / 5;
+	
+	$keypad.height(keypadHeight);
+	$(".keypad li").each(function() {
+		$(this).height(keyHeight);
+	});
+	$(".equals").height(2 * keyHeight);
+	
+	// @todo Readjust height when the viewport size changes
+}
 
 
 function calc() {
