@@ -14,7 +14,8 @@ var numbers = [];
 var decimal = false;
 var newNumber = true;
 
-var display;
+var displayOperator;
+var displayValue;
 
 $(window).ready(function(){
 	// Adjust keypad height to fit the window
@@ -34,8 +35,10 @@ $(window).ready(function(){
 	// @todo Readjust height when the viewport size changes
 	
 	
-	display = $(".display");
-	display.text(defaultValue);
+	displayOperator = $(".display .operator");
+	
+	displayValue = $(".display .value");
+	displayValue.text(defaultValue);
 
 	
 	$("body").on("click", "a[data-key]", function(e) {
@@ -131,8 +134,8 @@ function calc() {
 
 
 function press(key) {
-	var text = display.text();
-	var num = parseFloat(display.text());
+	var text = displayValue.text();
+	var num = parseFloat(displayValue.text());
 
 	switch (key) {
 		case "C":
@@ -140,39 +143,45 @@ function press(key) {
 			numbers = [];
 			decimal = false;
 			newNumber = true;
-			display.text(defaultValue);
+			displayOperator.text("");
+			displayValue.text(defaultValue);
 			break;
 		case "+":
 			operators.push("add");
 			numbers.push(num);
 			newNumber = true;
 			decimal = false;
-			display.text(calc());
+			displayOperator.text("+");
+			displayValue.text(calc());
 			break;
 		case "-":
 			operators.push("sub");
 			numbers.push(num);
 			newNumber = true;
 			decimal = false;
-			display.text(calc());
+			displayOperator.html("&minus;");
+			displayValue.text(calc());
 			break;
 		case "*":
 			operators.push("prod");
 			numbers.push(num);
 			newNumber = true;
 			decimal = false;
-			display.text(calc());
+			displayOperator.html("&times;");
+			displayValue.text(calc());
 			break;
 		case "/":
 			operators.push("div");
 			numbers.push(num);
 			newNumber = true;
 			decimal = false;
-			display.text(calc());
+			displayOperator.html("&divide;");
+			displayValue.text(calc());
 			break;
 		case "=":
 			numbers.push(num);
-			display.text(calc());
+			displayOperator.text("");
+			displayValue.text(calc());
 			newNumber = true;
 			
 			// reset
@@ -183,9 +192,9 @@ function press(key) {
 			break;
 		case "backspace":
 			if (text.length <= 1) {
-				display.text("0");
+				displayValue.text("0");
 			} else {
-				display.text(text.substr(0, text.length - 1));
+				displayValue.text(text.substr(0, text.length - 1));
 			}
 			break;
 		case ".":
@@ -195,7 +204,7 @@ function press(key) {
 					text = "0"; // in this case, we want this to be zero
 				}
 			
-				display.text(text + ".");
+				displayValue.text(text + ".");
 				decimal = true;
 			}
 			break;
@@ -207,7 +216,7 @@ function press(key) {
 				text = "";
 			}
 			
-			display.text(text + key);
+			displayValue.text(text + key);
 	}
 	
 	// Provide a visual reminder of which key was rpessed by marking the key as active

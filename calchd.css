@@ -69,10 +69,17 @@ li {
 	font-size: 18px;
 	font-weight: bold;
 	padding: 5px 9px;
-	text-align: right;
 	margin: 5px 0;
 	
 	-webkit-border-radius: 9px;
+}
+
+.display .operator {
+	color: #667979;
+}
+
+.display .value {
+	float: right;
 }
 
 .keypad li {
