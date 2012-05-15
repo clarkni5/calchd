@@ -53,15 +53,18 @@ li {
 .display_wrapper {
 	background: #333;
 	margin-bottom: 18px;
-	padding: 5px 18px;
+	padding: 5px 9px;
 	
-	-webkit-border-radius: 9px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 .make {
 	color: #F4ECAB;
+	float: left;
 	font-size: 14px;
 	font-weight: bold;
+	margin: 12px 9px 0 0;
 }
 
 .display {
@@ -70,12 +73,16 @@ li {
 	font-weight: bold;
 	padding: 5px 9px;
 	margin: 5px 0;
+	overflow: hidden;
 	
-	-webkit-border-radius: 9px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 .display .operator {
 	color: #667979;
+	font-size: 18px;
+	vertical-align: top;
 }
 
 .display .value {
@@ -110,20 +117,43 @@ li {
 	padding-left: 9px;
 	text-decoration: none;
 
+	border-radius: 9px;
 	-webkit-border-radius: 9px;
 }
 
-.keypad li.clear a {
-	background: #E33260;
-	color: #FFF;
-}
-
 a.active {
-	background: #A8A495;
+	background: #A59D83;
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
 	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
 	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA;
 }
+
+.keypad .clear a {
+	background: #F2164D;
+	color: white;
+}
+
+.keypad .clear a.active {
+	background: #CB0032;
+}
+
+.keypad .operator a {
+	background: #F2BB16;
+}
+
+.keypad .operator a.active {
+	background: #B18D2B;
+}
+
+.keypad .function a {
+	background: #164DF2;
+	color: white;
+}
+
+.keypad .function a.active {
+	background: #0032CB;
+}
+
 
 @media only screen and (min-width: 360px) {
 	.bezel {
@@ -131,18 +161,23 @@ a.active {
 	}
 
 	.display_wrapper {
-		margin-bottom: 40px;
-		padding: 20px 60px;
+		margin-bottom: 36px;
+		padding: 18px 45px;
+		
+		border-radius: 9px;
+		-webkit-border-radius: 9px;
 	}
 
 	.make {
+		float: none;
 		font-size: 16px;
+		margin: 0;
 	}
 
 	.display {
-		font-size: 20px;
-		padding: 20px;
-		margin: 20px 0;
+		font-size: 45px;
+		padding: 9px 18px;
+		margin: 18px 0;
 	}
 
 	.keypad li {
