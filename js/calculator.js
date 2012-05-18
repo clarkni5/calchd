@@ -1,17 +1,12 @@
 "use strict";
 
 /**
- *
- * All calculations follow this simple formula:
- * total operand input
- *
- * A special case is made for the equals operation. Calling equals more than 
- * once will repeat the last operation.
+ * A simple calculator class that can handle input one key at a time.
  */
 function Calculator() {
 	this.init = function() {
 		this.input = null;
-		this.b = 0;
+		this.b = 0; // remember the previous value
 		this.operand = null;
 		this.total = 0;
 		this.first = true; // ready to input the first value
@@ -19,10 +14,10 @@ function Calculator() {
 	this.init();
 
 	this.setOperand = function(operand) {
-		// Apply the current operation before setting the new operand
+		// Update the total before setting the new operand
 		if (this.input !== null) {
 			this.calc();
-			this.input = null;
+			this.input = null; // ready for a new input value
 		}
 
 		this.operand = operand;
@@ -30,7 +25,18 @@ function Calculator() {
 		
 		return this.total;
 	}
-	
+
+	/**
+	 * Calculations generally follow this simple formula:
+	 *   total = a <operand> b
+	 *
+	 * The value of 'a' is normally the current running total and the value of 'b'
+	 * is normally the most recent number value.
+	 *
+	 * When in doubt, the bahavior has been made to mimic the Texas Instruments 
+	 * Math Explorer TI-12 calculator. In particular, the expected behavior of the
+	 * following sequence is not well defined: 2 + 3 = 14 =
+	 */
 	this.calc = function() {
 		var a = this.total;
 		if (this.first && this.input) {
@@ -148,7 +154,7 @@ Calculator.prototype.divide = function() {
 
 Calculator.prototype.equals = function(key) {
 	this.calc();
-	this.input = null;
-	this.first = true; // ready to input the first value
+	this.input = null; // ready for a new input value
+	this.first = true; // override the first value if the user does not press an operand
 	return this.total;
 }
