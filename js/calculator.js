@@ -48,7 +48,7 @@ function Calculator() {
 		}
 		this.first = false;
 		
-		console.log("a: ", a, " b: ", this.b, " operand: ", this.operand, " total: ", this.total);
+		//console.log("a: ", a, " b: ", this.b, " operand: ", this.operand, " total: ", this.total);
 		
 		switch (this.operand) {
 			case "add":
@@ -66,6 +66,10 @@ function Calculator() {
 				break;
 			default:
 				this.total = a;
+		}
+		
+		if (this.operand) {
+			console.log(a + " " + this.operand + " " + this.b + " = " + this.total);
 		}
 		
 		return this.total;
