@@ -1,3 +1,5 @@
+"use strict";
+
 /*
 
 2 + 2 =
@@ -8,11 +10,7 @@
 
 */
 
-var defaultValue = 0;
-var operators = [];
-var numbers = [];
-var decimal = false;
-var newNumber = true;
+var calculator = new Calculator();
 
 var displayOperator;
 var displayValue;
@@ -23,7 +21,7 @@ $(window).ready(function(){
 	displayOperator = $(".display .operator");
 	
 	displayValue = $(".display .value");
-	displayValue.text(defaultValue);
+	displayValue.text("0");
 
 	
 	$("body").on("click", "a[data-key]", function(e) {
@@ -118,129 +116,16 @@ function adjustLayout() {
 	// @todo Readjust height when the viewport size changes
 }
 
-
-function calc() {
-	var result = 0;
-	
-	if (numbers.length) {
-		result = numbers[0];
-
-		for (var i = 0, j = 1; i < operators.length; i++, j++) {
-			if (numbers[j] == undefined) {
-				break;
-			}
-
-			var op = operators[i];
-
-			switch (op) {
-				case "add":
-					result += numbers[j];
-					break;
-				case "sub":
-					result -= numbers[j];
-					break;
-				case "prod":
-					result *= numbers[j];
-					break;
-				case "div":
-					// @todo Prevent division by zero
-					result /= numbers[j];
-					break;
-				default:
-					//
-			}
-		}
-	}
-	
-	return result;
-}
-
-
 function press(key) {
-	var text = displayValue.text();
-	var num = parseFloat(displayValue.text());
-
-	switch (key) {
-		case "C":
-			operators = [];
-			numbers = [];
-			decimal = false;
-			newNumber = true;
-			displayOperator.text("");
-			displayValue.text(defaultValue);
-			break;
-		case "+":
-			operators.push("add");
-			numbers.push(num);
-			newNumber = true;
-			decimal = false;
-			displayOperator.text("+");
-			displayValue.text(calc());
-			break;
-		case "-":
-			operators.push("sub");
-			numbers.push(num);
-			newNumber = true;
-			decimal = false;
-			displayOperator.html("&minus;");
-			displayValue.text(calc());
-			break;
-		case "*":
-			operators.push("prod");
-			numbers.push(num);
-			newNumber = true;
-			decimal = false;
-			displayOperator.html("&times;");
-			displayValue.text(calc());
-			break;
-		case "/":
-			operators.push("div");
-			numbers.push(num);
-			newNumber = true;
-			decimal = false;
-			displayOperator.html("&divide;");
-			displayValue.text(calc());
-			break;
-		case "=":
-			numbers.push(num);
-			displayOperator.text("");
-			displayValue.text(calc());
-			newNumber = true;
-			
-			// reset
-			operators = [];
-			numbers = [];
-			decimal = false;
-			
-			break;
-		case "backspace":
-			if (text.length <= 1) {
-				displayValue.text("0");
-			} else {
-				displayValue.text(text.substr(0, text.length - 1));
-			}
-			break;
-		case ".":
-			if ( ! decimal) {
-				if (newNumber) {
-					newNumber = false;
-					text = "0"; // in this case, we want this to be zero
-				}
-			
-				displayValue.text(text + ".");
-				decimal = true;
-			}
-			break;
-		default:
-			text = (num == 0 && ! decimal) ? "" : text; // replace the default value
-			
-			if (newNumber) {
-				newNumber = false;
-				text = "";
-			}
-			
-			displayValue.text(text + key);
+	var result;
+	
+	if (key == "backspace") {
+		result = calculator.backspace();
+	} else {
+		result = calculator.press(key);
 	}
+	
+	displayValue.text(result);
 	
 	// Provide a visual reminder of which key was rpessed by marking the key as active
 	$(".active").removeClass("active"); // remove previously active key
