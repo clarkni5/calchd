@@ -227,6 +227,34 @@
 				result = calculator.press("=");
 				equal(result, "3");
 			});
+			
+			test("Backspace", function() {
+				var calculator = new Calculator();
+				var result = null;
+				
+				calculator.press("2");
+				calculator.press("4");
+				result = calculator.backspace();
+				equal(result, "2");
+				calculator.press("*");
+				calculator.press("3");
+				result = calculator.press("=");
+				equal(result, "6");
+			});
+			
+			test("Backspace decimal", function() {
+				var calculator = new Calculator();
+				var result = null;
+				
+				calculator.press("2");
+				calculator.press(".");
+				result = calculator.backspace();
+				equal(result, "2");
+				calculator.press("*");
+				calculator.press("3");
+				result = calculator.press("=");
+				equal(result, "6");
+			});
 
 		});
 	

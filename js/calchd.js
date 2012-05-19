@@ -1,15 +1,5 @@
 "use strict";
 
-/*
-
-2 + 2 =
-2,2 | +
-
-22 + 2 * 4
-22,2,4 | +,*
-
-*/
-
 var calculator = new Calculator();
 
 var displayOperator;
@@ -17,6 +7,7 @@ var displayValue;
 
 $(window).ready(function(){
 	adjustLayout();
+	$(window).on("resize", adjustLayout);
 	
 	displayOperator = $(".display .operator");
 	
@@ -27,7 +18,6 @@ $(window).ready(function(){
 	$("body").on("click", "a[data-key]", function(e) {
 		var key = $(this).data("key");
 		press(key);
-		
 		e.preventDefault();
 	});
 
@@ -80,14 +70,15 @@ $(window).ready(function(){
 
 
 function adjustLayout() {
-	var keypadWidth = $(".keypad").width();
+	var $keypad = $(".keypad");
+	var keypadWidth = $keypad.width("auto").width();
 	var keyWidth = $(".clear").outerWidth();
 	
 	// Make corrections to the keypad and key size to keep the them aligned
 	var adjustment = keypadWidth % 4;
 	if (adjustment) {
 		keypadWidth = keypadWidth - adjustment;
-		$(".keypad").width(keypadWidth);
+		$keypad.width(keypadWidth);
 		
 		keyWidth = keypadWidth / 4;
 
@@ -102,7 +93,7 @@ function adjustLayout() {
 	
 	// Adjust keypad height to fit the window
 	var bezelHeight = $(".bezel").height();
-	var $keypad = $(".keypad");
+	var $keypad = $keypad;
 	var keypadPosition = $keypad.position();
 	var keypadHeight = bezelHeight - keypadPosition.top;
 	var keyHeight = keypadHeight / 5;
@@ -112,18 +103,10 @@ function adjustLayout() {
 		$(this).height(keyHeight);
 	});
 	$(".equals").height(2 * keyHeight);
-	
-	// @todo Readjust height when the viewport size changes
 }
 
 function press(key) {
-	var result;
-	
-	if (key == "backspace") {
-		result = calculator.backspace();
-	} else {
-		result = calculator.press(key);
-	}
+	var result = calculator.press(key);
 	
 	displayValue.text(result);
 	

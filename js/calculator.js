@@ -6,13 +6,16 @@
 function Calculator() {
 	this.init = function() {
 		this.input = null;
-		this.b = 0; // remember the previous value
+		this.b = 0; // remember the previous input value
 		this.operand = null;
 		this.total = 0;
 		this.first = true; // ready to input the first value
 	}
 	this.init();
 
+	/**
+	 * Set or override the current operand.
+	 */
 	this.setOperand = function(operand) {
 		// Update the total before setting the new operand
 		if (this.input !== null) {
@@ -48,8 +51,6 @@ function Calculator() {
 		}
 		this.first = false;
 		
-		//console.log("a: ", a, " b: ", this.b, " operand: ", this.operand, " total: ", this.total);
-		
 		switch (this.operand) {
 			case "add":
 				this.total = a + this.b;
@@ -68,6 +69,7 @@ function Calculator() {
 				this.total = a;
 		}
 		
+		// Log the calculation
 		if (this.operand) {
 			console.log(a + " " + this.operand + " " + this.b + " = " + this.total);
 		}
@@ -76,6 +78,11 @@ function Calculator() {
 	}
 }
 
+/**
+ * Press a single key. This allows you to enter numbers one digit at a time.
+ *
+ * @return String The appropriate display value based on the key.
+ */
 Calculator.prototype.press = function(key) {
 	var result = "";
 	
@@ -83,6 +90,9 @@ Calculator.prototype.press = function(key) {
 		case "c":
 		case "C":
 			result = this.clear();
+			break;
+		case "backspace":
+			result = this.backspace();
 			break;
 		case "=":
 			result = this.equals();
@@ -125,37 +135,73 @@ Calculator.prototype.press = function(key) {
 	return result;
 }
 
-Calculator.prototype.backspace = function() {
-	if (this.input.length <= 1) {
-		this.input = "0";
-	} else {
-		this.input = this.input.substr(0, this.input.length - 1);
-	}
-	
-	return this.input;
-}
-
+/**
+ * Clear and reset all values. This is the same as pressing the "c" or "C" key.
+ */
 Calculator.prototype.clear = function() {
 	this.init();
 	return this.total;
 }
 
+/**
+ * Remove the last input digit. If the last input was a decimal, then the
+ * decimal point will be removed.
+ */
+Calculator.prototype.backspace = function() {
+	if (this.input !== null) {
+		if (this.input.length <= 1) {
+			this.input = "0";
+		} else {
+			this.input = this.input.substr(0, this.input.length - 1);
+		}
+		
+		return this.input;
+	} else {
+		return "0";
+	}
+}
+
+/**
+ * Set the operand to add. This is the same as pressing the "+" key.
+ *
+ * @return String The current running total.
+ */
 Calculator.prototype.add = function() {
 	return this.setOperand("add");
 }
 
+/**
+ * Set the operand to subtract. This is the same as pressing the "-" key.
+ *
+ * @return String The current running total.
+ */
 Calculator.prototype.subtract = function() {
 	return this.setOperand("subtract");
 }
 
+/**
+ * Set the operand to multiply. This is the same as pressing the "*" key.
+ *
+ * @return String The current running total.
+ */
 Calculator.prototype.multiply = function() {
 	return this.setOperand("multiply");
 }
 
+/**
+ * Set the operand to divide. This is the same as pressing the "/" key.
+ *
+ * @return String The current running total.
+ */
 Calculator.prototype.divide = function() {
 	return this.setOperand("divide");
 }
 
+/**
+ * Calculate the toal value. This is the same as pressing the "=" key.
+ *
+ * @return String The total value.
+ */
 Calculator.prototype.equals = function(key) {
 	this.calc();
 	this.input = null; // ready for a new input value
