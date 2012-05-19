@@ -1,0 +1,211 @@
+@import "css3mixins.less";
+
+html {
+	font-size: 100%;
+	height: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+	font-family: sans-serif;
+	color: #222;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	font-size: 14px;
+	line-height: 1.4;
+	-webkit-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* apply a natural box layout model to all elements */
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+a {
+	color: #00e;
+}
+
+a:visited {
+	color: #551a8b;
+}
+
+a:hover {
+	color: #06e;
+}
+
+a:focus {
+	outline: thin dotted;
+}
+
+a:hover, a:active {
+	outline: 0;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+.bezel {
+	background: #9A9192;
+	height: 100%;
+	padding: 9px;
+}
+
+.display_wrapper {
+	background: #333;
+	.border-radius(5px);
+	margin-bottom: 18px;
+	padding: 5px 9px;
+}
+
+.make {
+	color: #F4ECAB;
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 12px 9px 0 0;
+}
+
+.display {
+	background: #AAD0D0;
+	.border-radius(5px);
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px 9px;
+	margin: 5px 0;
+	overflow: hidden;
+}
+
+.display .operator {
+	color: #667979;
+	font-size: 18px;
+	vertical-align: top;
+}
+
+.display .value {
+	float: right;
+}
+
+.keypad li {
+	float: left;
+	padding: 2px;
+	width: 25%;
+}
+
+.keypad li.equals {
+	float: right;
+}
+
+.keypad li.zero {
+	width: 50%;
+}
+
+.keypad a {
+	background: #CCC9C0;
+	border: solid 2px #555;
+	.border-radius(9px);
+	.box-shadow(~"0 1px 0 rgba(0, 0, 0, 0.1), inset 1px 1px 2px rgba(255, 255, 255, 0.7)");
+	color: #333;
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	height: 100%;
+	padding-left: 9px;
+	text-decoration: none;
+}
+
+a.active {
+	background: #A59D83;
+	.box-shadow(~"0 1px 0 rgba(0, 0, 0, 0.1), inset 0 0 5px #15EAEA");
+}
+
+.keypad .clear a {
+	background: #F2164D;
+	color: white;
+}
+
+.keypad .clear a.active {
+	background: #CB0032;
+}
+
+.keypad .operator a {
+	background: #F2BB16;
+}
+
+.keypad .operator a.active {
+	background: #B18D2B;
+}
+
+.keypad .function a {
+	background: #164DF2;
+	color: white;
+}
+
+.keypad .function a.active {
+	background: #0032CB;
+}
+
+
+@media only screen and (min-width: 360px) {
+	.bezel {
+		padding: 18px;
+	}
+
+	.display_wrapper {
+		.border-radius(9px);
+		margin-bottom: 36px;
+		padding: 18px 45px;
+	}
+
+	.make {
+		float: none;
+		font-size: 16px;
+		margin: 0;
+	}
+
+	.display {
+		font-size: 45px;
+		padding: 9px 18px;
+		margin: 18px 0;
+	}
+
+	.keypad li {
+		padding: 9px;
+	}
+
+	.keypad a {
+		font-size: 45px;
+		padding-left: 18px;
+	}
+}

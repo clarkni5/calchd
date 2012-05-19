@@ -1,0 +1,74 @@
+.background-clip(@clip) {
+	-moz-background-clip: ~`"@{clip}".replace("-box", "")`; // remove "-box" from the clip value
+	-webkit-background-clip: @clip;
+	background-clip: @clip;
+}
+
+.border-radius(@border-radius) {
+	-webkit-border-radius: @border-radius; /* Saf3-4, iOS 1-3.2, Android <e;1.6 */
+	-moz-border-radius: @border-radius; /* FF1-3.6 */
+	border-radius: @border-radius; /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+
+	/* prevent the background color from leaking outside the border: */
+	.background-clip(padding-box);
+}
+
+.border-top-left-radius(@border-radius) {
+	-moz-border-radius-topleft: @border-radius;  /* Firefox up to version 3.6 */
+	-webkit-border-top-left-radius: @border-radius;  /* Safari, Chrome (before WebKit version 533) */
+	border-top-left-radius: @border-radius;  /* Firefox 4; browsers with CSS3 support */
+}
+
+.border-top-right-radius(@border-radius) {
+	-moz-border-radius-topright: @border-radius;  /* Firefox up to version 3.6 */
+	-webkit-border-top-right-radius: @border-radius;  /* Safari, Chrome (before WebKit version 533) */
+	border-top-right-radius: @border-radius;  /* Firefox 4; browsers with CSS3 support */
+}
+
+.border-bottom-left-radius(@border-radius) {
+	-moz-border-radius-bottomleft: @border-radius;  /* Firefox up to version 3.6 */
+	-webkit-border-bottom-left-radius: @border-radius;  /* Safari, Chrome (before WebKit version 533) */
+	border-bottom-left-radius: @border-radius;  /* Firefox 4; browsers with CSS3 support */
+}
+
+.border-bottom-right-radius(@border-radius) {
+	-moz-border-radius-bottomright: @border-radius;  /* Firefox up to version 3.6 */
+	-webkit-border-bottom-right-radius: @border-radius;  /* Safari, Chrome (before WebKit version 533) */
+	border-bottom-right-radius: @border-radius;  /* Firefox 4; browsers with CSS3 support */
+}
+
+.box-shadow(@shadow) {
+	-webkit-box-shadow: @shadow;
+	-moz-box-shadow: @shadow;
+	box-shadow: @shadow;
+}
+
+.box-sizing(@sizing) {
+	-webkit-box-sizing: @sizing;
+	-moz-box-sizing: @sizing;
+	box-sizing: @sizing;
+}
+
+.opacity(@opacity) {
+	filter: e(%("alpha(opacity=%d)", @opacity * 100));
+	-khtml-opacity: @opacity;
+	-moz-opacity: @opacity;
+	opacity: @opacity;
+}
+
+.user-select(@select) {
+	-webkit-user-select: @select;
+	-khtml-user-select: @select;
+	-moz-user-select: @select;
+	-ms-user-select: @select;
+	-o-user-select: @select;
+	user-select: @select;
+}
+
+.transition(@transition) {
+	-webkit-transition: @transition;
+	-moz-transition: @transition;
+	-ms-transition: @transition;
+	-o-transition: @transition;
+	transition: @transition;
+}
