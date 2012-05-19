@@ -14,7 +14,7 @@ function Calculator() {
 	this.init();
 
 	/**
-	 * Set or override the current operand.
+	 * Set (or override) the current operand.
 	 */
 	this.setOperand = function(operand) {
 		// Update the total before setting the new operand
@@ -110,10 +110,11 @@ Calculator.prototype.press = function(key) {
 			result = this.divide();
 			break;
 		case ".":
-			// Make sure the number doesn't already have a decimal
+			// Add a leading zero if necessary
 			if (this.input === null) {
 				this.input = "0";
 			}
+			// Make sure the number doesn't already have a decimal
 			if (this.input === null || this.input.indexOf(".") === -1) {
 				this.input += ".";
 			}
@@ -137,15 +138,19 @@ Calculator.prototype.press = function(key) {
 
 /**
  * Clear and reset all values. This is the same as pressing the "c" or "C" key.
+ *
+ * @return String A display value of "0"
  */
 Calculator.prototype.clear = function() {
 	this.init();
-	return this.total;
+	return String(this.total);
 }
 
 /**
  * Remove the last input digit. If the last input was a decimal, then the
  * decimal point will be removed.
+ *
+ * @return String The updated display value.
  */
 Calculator.prototype.backspace = function() {
 	if (this.input !== null) {
@@ -167,7 +172,7 @@ Calculator.prototype.backspace = function() {
  * @return String The current running total.
  */
 Calculator.prototype.add = function() {
-	return this.setOperand("add");
+	return String(this.setOperand("add"));
 }
 
 /**
@@ -176,7 +181,7 @@ Calculator.prototype.add = function() {
  * @return String The current running total.
  */
 Calculator.prototype.subtract = function() {
-	return this.setOperand("subtract");
+	return String(this.setOperand("subtract"));
 }
 
 /**
@@ -185,7 +190,7 @@ Calculator.prototype.subtract = function() {
  * @return String The current running total.
  */
 Calculator.prototype.multiply = function() {
-	return this.setOperand("multiply");
+	return String(this.setOperand("multiply"));
 }
 
 /**
@@ -194,7 +199,7 @@ Calculator.prototype.multiply = function() {
  * @return String The current running total.
  */
 Calculator.prototype.divide = function() {
-	return this.setOperand("divide");
+	return String(this.setOperand("divide"));
 }
 
 /**
@@ -206,5 +211,14 @@ Calculator.prototype.equals = function(key) {
 	this.calc();
 	this.input = null; // ready for a new input value
 	this.first = true; // override the first value if the user does not press an operand
-	return this.total;
+	return String(this.total);
+}
+
+/**
+ * Returns the current operand.
+ *
+ * @return String The operand.
+ */
+Calculator.prototype.getOperand = function() {
+	return (this.operand && !this.first) ? this.operand : null;
 }

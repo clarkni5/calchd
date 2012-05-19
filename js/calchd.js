@@ -107,10 +107,31 @@ function adjustLayout() {
 
 function press(key) {
 	var result = calculator.press(key);
+	var operand = calculator.getOperand();
 	
+	// Turn the operand into an appropriate HTML entity
+	var operandHtml = "";
+	switch (operand) {
+		case "add":
+			operandHtml = "+";
+			break;
+		case "subtract":
+			operandHtml = "&minus;";
+			break;
+		case "multiply":
+			operandHtml = "&times;";
+			break;
+		case "divide":
+			operandHtml = "&divide;";
+			break;
+		default:
+			// do nothing
+	}
+
 	displayValue.text(result);
+	displayOperator.html(operandHtml);
 	
-	// Provide a visual reminder of which key was rpessed by marking the key as active
+	// Provide a visual reminder of which key was pressed by marking the key as active
 	$(".active").removeClass("active"); // remove previously active key
 	$("[data-key='" + key + "']").addClass("active");
 }
