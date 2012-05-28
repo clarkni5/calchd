@@ -47,6 +47,11 @@ body {
 	*zoom: 1;
 }
 
+html,
+body {
+	background: #9A9192;
+}
+
 a {
 	color: #00e;
 }
@@ -77,7 +82,6 @@ li {
 }
 
 .bezel {
-	background: #9A9192;
 	height: 100%;
 	padding: 9px;
 }
@@ -180,8 +184,30 @@ a.active {
 	background: #0032CB;
 }
 
+@media only screen and (min-height: 500px) {
+	.bezel {
+		padding: 18px;
+	}
 
-@media only screen and (min-width: 360px) {
+	.display_wrapper {
+		.border-radius(9px);
+		margin: 0 2px 18px 2px;
+		padding: 9px 27px;
+	}
+
+	.make {
+		font-size: 20px;
+		margin: 23px 9px 0 0;
+	}
+
+	.display {
+		font-size: 27px;
+		padding: 9px 18px;
+		margin: 9px 0 9px 0;
+	}
+}
+
+@media only screen and (min-height: 768px) {
 	.bezel {
 		padding: 18px;
 	}
@@ -203,7 +229,9 @@ a.active {
 		padding: 9px 18px;
 		margin: 9px 0 18px 0;
 	}
+}
 
+@media only screen and (min-width:600px) and (min-height: 800px) {
 	.keypad li {
 		padding: 9px;
 	}
@@ -213,3 +241,4 @@ a.active {
 		padding-left: 18px;
 	}
 }
+
